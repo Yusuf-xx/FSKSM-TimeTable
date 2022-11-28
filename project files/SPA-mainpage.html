@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>SPA-mainpage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    
+    <!-- // loaded bootstrap from CDN
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    -->
+    
+    <!-- // loaded bootstrap from local folder -->
+    <script src="./bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./bootstrap-4.6.1-dist/css/bootstrap.min.css">
+
+</head>
+
+<body ng-app="ttapp">
+    <div class="container">
+        <nav class="navbar navbar-light bg-light navbar-expand sticky-top" style="overflow-y: scroll">
+          <a class="navbar-brand" href="#">Home</a>
+          <a class="navbar-brand" href="#!sessem">Session/Semester</a>
+          <a class="navbar-brand" href="#!course">Courses</a>
+          <a class="navbar-brand" href="#">Lecturers</a>
+          <a class="navbar-brand" href="#">Students</a>
+          <a class="navbar-brand" href="#">Analysis</a>
+          <a class="navbar-brand" href="#">Timetable</a>
+        </nav>
+        <div class="ng-view"></div>
+    </div>
+</body>
+<script>
+  var app = angular.module("ttapp", ["ngRoute"]);
+  
+  app.config(function($routeProvider) {
+    $routeProvider
+    .when("/sessem", { templateUrl : "SPA-sessem.html" })
+    .when("/course", { templateUrl : "SPA-courses.html" });
+  });
+</script>
+<script src="SPA-sessem.js"></script>
+<script src="SPA-courses.js"></script>

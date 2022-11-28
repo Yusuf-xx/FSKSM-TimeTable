@@ -1,0 +1,319 @@
+        <html>
+
+<TITLE>Timetable</TITLE>
+<link href="css/template_css.css" rel="stylesheet" type="text/css">
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<script language="JavaScript" src="javascript/calendar1.js"></script>
+<script language="javascript" src="javascript/DFilter.js"></script>
+<script language="javascript" src="javascript/ajax.js"></script>
+<script language="javascript" src="javascript/ajax-json.js"></script>
+<script language="JavaScript">
+function DFilterIC(evt,obj){
+	evt = (evt) ? evt : window.event;
+	return dFilter (evt.keyCode, obj, '######-##-####');
+}
+
+function DFilterDate(evt,obj){
+	evt = (evt) ? evt : window.event;
+	return dFilter (evt.keyCode, obj, '##-##-####');
+}
+
+
+function checkInteger(evt,value) {
+
+    evt = (evt) ? evt : window.event;
+
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+    // 39 -Right Key 
+
+    // 37 -Left Key
+
+	status=value;
+
+	
+
+    if ((charCode >= 48 && charCode <= 57) || (value.length==0 && charCode==45) || charCode==8 || charCode==40 || charCode==41 || charCode==50 || charCode==39 || charCode==37) {
+
+        //status = "";
+
+	    return true;
+
+    }
+
+        //status = "This field accepts numbers only.";
+
+        return false;
+
+}
+
+function CheckDouble(evt,value,decpoint){
+	allowchar="1234567890.";
+	evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    var exCode=new Array(8,9,37,38,39,40);
+    for(var code in exCode) {
+	    if(charCode==exCode[code]){
+    		return true;
+    	}
+    }
+    //alert(charCode);
+    var charval=String.fromCharCode(charCode);
+    if(allowchar.indexOf(charval) > -1){
+    	if(value.indexOf(".") > -1){
+			if(value.length-value.indexOf(".") < decpoint+1){
+				return true;
+			}else{
+				return false;
+			}
+    	}else{
+	    	return true;
+    	}
+    }else{
+    	return false;
+    }
+}
+
+function CheckIC(evt,value){
+
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+    // 39 -Right Key 
+
+    // 37 -Left Key
+
+	status=value;
+
+	
+
+    if ((charCode >= 48 && charCode <= 57) || charCode==45 || charCode==8 || charCode==40 || charCode==41 || charCode==50 || charCode==39 || charCode==37 || charCode==46 || charCode==9) {
+
+        //status = "";
+	    return true;	    
+    }
+
+        //status = "This field accepts numbers only.";
+
+        return false;
+
+}
+
+function change_bgcolor(form,scolor){
+	
+	form.style.backgroundColor=scolor;
+	form.style.cursor="hand";
+	
+}
+function linkto(place){
+	//surl="<%script_name%>?page=" + place;
+	
+	if(place==""){
+		surl="index.php?option=com_checker";
+		location.href=surl;
+
+	}else{
+		surl="index.php?option=com_checker&action=" + place;
+		location.href=surl;
+	}
+}
+
+function linkto2(place){
+
+	
+	if(place==""){
+		surl="index.php?option=com_booking";
+		location.href=surl;
+
+	}
+	
+}
+
+function linktoSubjectlist(place){
+	if(place==""){
+		surl="index.php?option=com_subjectlist";
+		location.href=surl;
+
+	}
+	
+}
+
+
+
+
+function linktoOut(place){
+	if(place==""){
+		surl="index.php?option=logout";
+		location.href=surl;
+
+	}
+	
+}
+
+</script>
+
+<!-- Date only with year scrolling -->
+</head>
+
+<BODY text=#000000 vLink=#5C84C1 aLink=#5C84C1 link=#000000 bgColor=#CCCCCC topMargin=0 marginheight="0" leftmargin="0" rightmargin="0" >
+
+<div align="center">
+<TABLE width="100%" border=0 cellPadding=0 cellSpacing=0 bgColor=#ffffff>
+  <TBODY>
+  <tr><td bgcolor="#00C2FA" height="56"><div align="left" class="category style8"><img src="images/banner_3.jpg"></div>      </td>
+  </tr>
+  </tr>
+  <TR>
+    <TD vAlign=top width="100%">
+      <div align="center">        
+		<table border="1" width="100%" id="table1" style="border-collapse: collapse" cellpadding="0" cellspacing="0">
+			<tr>
+				<td valign="top" bgcolor="#6699FF">
+				
+				<table border="1" width="100%" id="table2" style="border-collapse: collapse" cellspacing="1" cellpadding="2" bordercolor="#05AEE2"  background="images/nav.jpg">
+					<tr height="12">
+						<td align="center" width="5%"><b>
+						<font face="Franklin Gothic Medium" size="2" color="#990033">
+						Timetable</font><font face="Franklin Gothic Medium" color="#990033">::</font><font face="Franklin Gothic Medium" size="2" color="#990033">&nbsp;&nbsp; </font>
+						</b></td>
+				
+				
+
+				<td onmouseover="change_bgcolor(this,'#0000ff')" onmouseout="change_bgcolor(this,'')" onClick="linkto('student')" align="center" width="12%"><b><font face="Trebuchet MS" size="2"> 
+				<a href="index.php?option=com_checker&action=student">Student</a> </font></b></td>
+				
+				<td onmouseover="change_bgcolor(this,'#0000ff')" onmouseout="change_bgcolor(this,'')" onClick="linkto('lecturer')" align="center" width="12%"><b><font face="Trebuchet MS" size="2">
+				<a href="index.php?option=com_checker&action=lecturer">Lecturer</a> </font></b></td>
+						
+				
+				
+				
+				
+					</tr>
+				</table>
+				
+				</td>
+			</tr>
+		</table>
+</TD>
+</TR>
+  <TR>
+    <TD vAlign=top width="100%" bgcolor="#EEF3F7" height="20">
+		<p align="center">	
+				<p><blockquote>
+					<font face="Trebuchet MS" size="2"><b>Faculty : FSKSM</b></font>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<font face="Trebuchet MS" size="2"><b>Session : 202120221</b> <a href="index.php?option=com_session_selection">[Change]</a></font>
+				</blockquote>
+				</p></TD>
+</TR>
+  <TR>
+    <TD vAlign=top width="100%" bgcolor="#EEF3F7">
+      		
+					<table border="0" width="100%" id="table3" style="border-collapse: collapse" cellpadding="2" cellspacing="2">
+						<tr>
+							<td>
+<blockquote>
+								<p align="left">
+								<font face="Trebuchet MS" size="2">
+								<br>
+								        <html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Subjects</title>
+<script language="javascript">
+function ShowTimetable(){
+	submitTo="?option=com_checker&action=studenttimetable";
+  	http('POST', submitTo, ShowTimetableResponse,document.itemlist);
+}
+
+function ShowTimetableResponse(data){
+	document.getElementById("timetablecontent").innerHTML=data['content'];
+//	document.getElementById("").i	
+	//document.getElementById("timetablecontent").innerHTML+=data['qs'];	
+}
+function PrintContent()
+    {
+        var DocumentContainer = document.getElementById('timetablecontent');
+        var WindowObject = window.open('', "Timetable", 
+                              "width=740,height=325,top=200,left=250,toolbars=no,scrollbars=yes,status=no,resizable=no");
+        WindowObject.document.writeln(DocumentContainer.innerHTML);
+        WindowObject.document.close();
+        WindowObject.focus();
+        WindowObject.print();
+        WindowObject.close();
+    }
+    
+</script>
+</head>
+<body>
+<form method="POST" name="itemlist" action="?option=com_checker&action=studenttimetable">
+	<div align="center">
+		<font color="#0000CC"><b><font face="Sylfaen" size="5">STUDENT TIMETABLE <br>
+		</font><font face="Sylfaen" size="4">202120221</font></b><font face="Sylfaen"><br>
+		</font></font><br>
+&nbsp;<table border="1" id="table1" style="border-collapse: collapse" bordercolor="#3366CC" cellspacing="0" cellpadding="4">
+			<tr>
+				<td width="134" bgcolor="#99CCFF">
+<p align="center"><b><font face="Trebuchet MS" size="2">Student Groups </font></b></p></td>
+				<td><font face="Trebuchet MS" size="2"><select size="1" name="cboitemlist" >
+<option  value="228">1 SECJH SEC 15 (MARCH 2021 INTAKE)</option><option  value="227">1 SECJH SEC 15 (SEPT 2021 INTAKE)</option><option  value="216">1 SMJCH SEC 1 (MARCH 2021 INTAKE)</option><option  value="218">1 SMJCH SEC 1 (SEPT 2021 INTAKE)</option><option  value="217">1 SMJCH SEC 2 (MARCH 2021 INTAKE)</option><option  value="219">1 SMJCH SEC 2 (SEPT 2021 INTAKE)</option><option  value="220">1 SMJEH SEC 1 (SEPT 2021 INTAKE)</option><option  value="221">1 SMJEH SEC 2 (SEPT 2021 INTAKE)</option><option  value="222">1 SMJMH SEC 1 ( MARCH 2021 INTAKE)</option><option  value="225">1 SMJMH SEC 1 (OCT 2021 INTAKE)</option><option  value="223">1 SMJMH SEC 2 (MARCH 2021 INTAKE)</option><option  value="226">1 SMJMH SEC 2 (OCT 2021 INTAKE)</option><option  value="230">2 SECJH SEC 15 (MARCH 2020 INTAKE)</option><option  value="229">2 SECJH SEC 15 (SEPT 2020 INTAKE)</option><option  value="206">2 SMJC SEC 1 (MARCH 2020 INTAKE)</option><option  value="208">2 SMJC SEC 1 (SEPT 2020 INTAKE) </option><option  value="207">2 SMJC SEC 2 (MARCH 2020 INTAKE)</option><option  value="209">2 SMJC SEC 2 (SEPT 2020 INTAKE)</option><option  value="210">2 SMJE SEC 1 (SEPT 2020 INTAKE)</option><option  value="211">2 SMJE SEC 2 (SEPT 2020 INTAKE) </option><option  value="212">2 SMJM SEC 1 (MARCH 2020 INTAKE) </option><option  value="214">2 SMJM SEC 1 (OCT 2020 INTAKE)</option><option  value="213">2 SMJM SEC 2 (MARCH 2020 INTAKE)</option><option  value="215">2 SMJM SEC 2 (OCT 2020 INTAKE)</option><option  value="231">3 SECJ SEC 15 (SEPT 2019 INTAKE)</option><option  value="192">3 SMJC SEC 1 (MARCH 2019 INTAKE)</option><option  value="200">3 SMJC SEC 1 (SEPT 2019 INTAKE)</option><option  value="193">3 SMJC SEC 2 (MARCH 2019 INTAKE)</option><option  value="201">3 SMJC SEC 2 (SEPT 2019 INTAKE)</option><option  value="196">3 SMJE SEC 1 (SEPT 2019 INTAKE)</option><option  value="197">3 SMJE SEC 2 (SEPT 2019 INTAKE)</option><option  value="202">3 SMJM SEC 1 (MARCH 2019 INTAKE)</option><option  value="204">3 SMJM SEC 1 (SEPT 2019 INTAKE)</option><option  value="203">3 SMJM SEC 2 (MARCH 2019 INTAKE)</option><option  value="205">3 SMJM SEC 2 (SEPT 2019 INTAKE)</option><option  value="232">4 SMJC SEC 1 (FEB 2018 INTAKE)</option><option  value="190">4 SMJC SEC 1 (SEPT 2018 INTAKE)</option><option  value="233">4 SMJC SEC 2 (FEB 2018 INTAKE)</option><option  value="191">4 SMJC SEC 2 (SEPT 2018 INTAKE)</option><option  value="194">4 SMJE SEC 1</option><option  value="195">4 SMJE SEC 2</option><option  value="198">4 SMJM SEC 1</option><option  value="199">4 SMJM SEC 2</option><option  value="237">MMJS & MMJJ </option><option  value="234">UMJJ6013 01</option><option  value="235">UMJJ6013 02</option><option  value="238">UMJP0010 01</option>
+</select></font><font face="Trebuchet MS">&nbsp;&nbsp;
+				<input type="button" value="Show" name="submitbutton" onclick="ShowTimetable()"> <input type="button" value="Print" name="B1" onclick="PrintContent()"></font></td>
+			</tr>
+		</table>
+	</div>
+</form>
+<div id="fullcontent">
+</div>
+<div id="timetablecontent">
+</div>
+<script language="javascript">
+//document.all("submitbutton").onclick=ShowStudentTimetable;
+</script>
+</body>
+
+</html>
+ 
+								</font></p>
+								<p align="left">
+								&nbsp;</p>
+								
+								<p align="left">
+								&nbsp;</p>
+								<p align="left">
+								&nbsp;</p>
+								<p align="left">
+								&nbsp;</p>
+							</blockquote></td>
+						</tr>
+			</table>
+					<p>&nbsp;</p>
+					
+				
+				
+				
+				</TD>
+</TR>
+  <TR>
+    <TD vAlign=top width="100%" bgcolor="#EEF3F7" background="images/pixels.jpg">
+      	&nbsp;</TD>
+</TR>
+  <TR>
+    <TD vAlign=top width="100%" bgcolor="#CCCCCC" height="46">
+
+		<br>
+		
+&nbsp;</TD>
+</TR>
+</TBODY>
+</TABLE>
+</div>
+</BODY>
+</HTML>
+
